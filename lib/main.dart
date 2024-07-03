@@ -25,6 +25,11 @@ class MyApp extends StatelessWidget {
 
 class MyAppState extends ChangeNotifier {
   var current = WordPair.random();
+
+  void nextWord() {
+    current = WordPair.random();
+    notifyListeners();
+  }
 }
 
 class MyHomeScreen extends StatelessWidget {
@@ -43,7 +48,7 @@ class MyHomeScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          print('FloatingActionButton pressed');
+          appState.nextWord();
         },
         child: const Icon(Icons.refresh),
       ),
