@@ -19,7 +19,7 @@ _**Nota:**_ si ya se creo la carpeta donde se va a realizar el proyecto antes de
 flutter create .
 ```
 ## 2. Importar dependencias para el proyecto.
-Como todo proyecto de desarrollo lo mas probable es que necesites manejar dependencias (uso de paquetes de terceros) en *Flutter* las dependencias se manejan en un archivo `YML` llamado `pubspec.yaml`, para importar una nueva dependencia podemos usar la terminal de comandos o ingresarlas directamente en el archivo.
+Como todo proyecto de desarrollo lo mas probable es que necesites manejar dependencias (uso de paquetes de terceros) en *Flutter* las dependencias se manejan en un archivo `YAML` llamado `pubspec.yaml`, para importar una nueva dependencia podemos usar la terminal de comandos o ingresarlas directamente en el archivo.
 ```bash
 flutter pub add <name_package>
 ```
@@ -54,7 +54,7 @@ linter:
 ```
 
 ## 4. Archivo Main.dart 
-Crear el Widget principal en el archivo main. El archivo principal de ejecución en un proyecto *Flutter* se encuentra ubicado en `lib/main.dart` en este archivo vamos a reemplazar el contenido por el siguiente:
+El archivo principal de ejecución en un proyecto *Flutter* se encuentra ubicado en `lib/main.dart` en este archivo vamos a reemplazar el contenido por el siguiente:
 ```dart
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
@@ -150,7 +150,7 @@ void main () => runApp(MyApp());
 ```
 Toda aplicación de dart comienza a partir de el método `main` y como podemos notar al importar el paquete `flutter/material.dart` traemos el método `runApp`, este es el método principal que usar *Flutter* para ejecutarse. por el momento el Widget padre que ejecutamos en `runApp` es `MyApp`. Entonces, que es un Widget?
 
-Para seguir la teoría te voy a dar la definición "oficial": Un Widget en *Flutter* es un bloque de construcción fundamental para la interfaz de usuario. En otras palabras todo componente visual que veas en una app de *Flutter* es un Widget, puede haber ciertas excepciones pero esto para principios prácticos es una definición precisa, se puede decir que comprendiendo esto entendemos la famosa frase de flutter
+Para seguir la teoría te voy a dar la definición "oficial": Un Widget en *Flutter* es un bloque de construcción fundamental para la interfaz de usuario. En otras palabras todo componente visual que veas en una app de *Flutter* es un Widget, puede haber ciertas excepciones pero esto para principios prácticos es una definición precisa, se puede decir que comprendiendo esto entendemos la famosa frase:
 
 <blockquote style="font-style: italic; font-size: 1.2em;">
   "En Flutter todo es un Widget"
@@ -226,7 +226,7 @@ _**Nota:**_ Cada vez que se genera una actualización del un Widget, este ejecut
 ## 8. Agregando el nuestro primer comportamiento
 Viendo y comprendiendo los conceptos anteriores, vamos a crear nuestro primer comportamiento en la app, visualizando así los cambios que ejecutemos en el Widget `MyHomeScreen`.
 
-1. Agregamos un método para modificar el estado en la case `MyAppState`.
+1. Agregamos un método para modificar el estado en la clase `MyAppState`.
     ```dart
     class MyAppState extends ChangeNotifier {
       var current = WordPair.random();
