@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
+import 'package:flutter_get_start/config/themes/themes.dart';
+import 'package:flutter_get_start/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(const MyApp());
@@ -9,16 +11,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => MyAppState(),
-      child: MaterialApp(
-        title: 'First Flutter App',
-        theme: ThemeData(
-          useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyanAccent),
-        ),
-        home: const MyHomeScreen(),
-      ),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => MyAppState()),
+        ChangeNotifierProvider(create: (context) => ThemeProvider()),
+      ],
+      child: MyHomeScreen(),
     );
   }
 }
@@ -38,19 +36,37 @@ class MyHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
+    final ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
+    TextTheme textTheme = createTextTheme(context, "Lato", "Noto Sans");
+    MaterialTheme theme = MaterialTheme(textTheme);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('First Flutter App'),
-      ),
-      body: Center(
-        child: Text('Random word: ${appState.current.asLowerCase}'),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          appState.nextWord();
-        },
-        child: const Icon(Icons.refresh),
+    return MaterialApp(
+      title: 'First Flutter App',
+      theme: themeProvider.themePreference == ThemePreference.light ? theme.light() : theme.dark(),
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('First Flutter App'),
+          actions: [
+            IconButton(
+              icon: Icon(
+                themeProvider.themePreference == ThemePreference.light ? Icons.light_mode : Icons.dark_mode,
+              ),
+              onPressed: () {
+                themeProvider.toggleTheme();
+              },
+            ),
+          ],
+        ),
+        body: Center(
+          child: Text('Random word: ${appState.current.asLowerCase}'),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            appState.nextWord();
+          },
+          child: const Icon(Icons.refresh),
+        ),
       ),
     );
   }
